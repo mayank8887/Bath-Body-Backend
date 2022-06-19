@@ -2,6 +2,7 @@ const app= require("./app");
 
 const dotenv=require("dotenv");
 const connectDatabase=require("./Config/database")
+const port = process.env.PORT || 4000
 
 
 //Handling Uncaught Exception
@@ -19,9 +20,9 @@ dotenv.config({path:"Config/config.env"})
 
 connectDatabase()
 
-const server =app.listen(process.env.port,()=>{
+const server =app.listen(port,()=>{
     
-    console.log(`Server is working on https://localhost ${process.env.port}`)
+    console.log(`Server is working on https://localhost ${port}`)
 })
 
 
