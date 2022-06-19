@@ -1,7 +1,8 @@
 const { restart } = require("nodemon");
 const Product=require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
-const catchAsyncErrors= require("../middleware/cathAsyncerror")
+const catchAsyncErrors= require("../middleware/cathAsyncerror");
+const ApiFeatures = require("../utils/apifeatures");
 
 
 //Create Product;
@@ -21,10 +22,12 @@ exports.createProduct= catchAsyncErrors(async(req,res,next)=>{
 
 exports.getAllProducts = catchAsyncErrors(async(req,res) =>{
 
-      const products = await Product.find();
+      const resultPerPage = 5;
+      const apiFeature = new ApiFeatures(Product.find(),req.query).search().filter().pagination(resultPerPage);
+      const products = await apiFeature.query;
       res.status(200).json({
             success:true,
-            products
+            products,
       })
 })
 
@@ -41,7 +44,7 @@ exports.getProductDetails= catchAsyncErrors(async(req,res,next)=>{
 
       res.status(200).json({
             success:true,
-            product
+            product,
       })
 })
 
