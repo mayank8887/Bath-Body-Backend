@@ -9,6 +9,7 @@ const fetchDataRequest=(payload)=>{
     }
 }
 
+
 const fetchDataSuccess=(payload)=>{
 
     return{
